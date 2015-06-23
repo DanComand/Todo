@@ -1,2 +1,41 @@
-<h1>Lists#show</h1>
-<p>Find me in app/views/lists/show.html.erb</p>
+  <p>Todos for <%= @list.name %></p>
+
+  <% @list.todos.each do |todo| %>
+    <p>
+      <%= todo.task %>
+      <br>
+      <% if todo.user != nil %>
+        <em> by <%= todo.user.email %></em>
+        Added on: <%= todo.created_at %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if current_user %>
+  <h4>New Review</h4>
+
+  <%= form_for([@list, @todo]) do |f| %>
+    <% if @todo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+        <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :task %><br />
+      <%= f.text_area :task %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+<% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to add a task.</p> 
+<% end %>

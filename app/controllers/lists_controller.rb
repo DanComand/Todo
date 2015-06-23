@@ -9,6 +9,9 @@ class ListsController < ApplicationController
 
   def show
   	@list = List.find(params[:id])
+    if current_user
+      @todo = @list.todos.build
+    end
   end
 
   def create
