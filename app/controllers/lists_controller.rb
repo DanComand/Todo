@@ -12,16 +12,14 @@ before_filter :ensure_logged_in, only: [:index, :show, :create, :destroy]
 
   def show
   	@list = List.find(params[:id])
-    if current_user
-      @todo = @list.todos.build
-    end
+    @todos = @list.todos.order(created_at: :desc)
   end
 
   def create
   	@list = List.new(list_params)
     @list.user_id = current_user.id
   	if @list.save
-  		redirect_to lists_url
+  		redirect_to :back 
   	else
   		render :new
   	end
@@ -30,7 +28,7 @@ before_filter :ensure_logged_in, only: [:index, :show, :create, :destroy]
   def update
   	@list = List.find(params[:id])
 
-  	if @list.update_attributes(product_params)
+  	if @list.update_attributes(list_params)
   		redirect_to list_path(@list)
   	else
   		render :edit

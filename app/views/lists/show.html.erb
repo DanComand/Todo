@@ -1,6 +1,6 @@
   <p>Todos for <%= @list.name %></p>
 
-  <% @list.todos.each do |todo| %>
+  <% @todos.each do |todo| %>
     <p>
       <%= todo.task %>
       <br>
@@ -14,22 +14,11 @@
   <% if current_user %>
   <h4>New Review</h4>
 
-  <%= form_for([@list, @todo]) do |f| %>
-    <% if @todo.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-        <ul>
-        <% @task.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <%= form_for([@list, Todo.new]) do |f| %>
 
     <div class="field">
       <%= f.label :task %><br />
-      <%= f.text_area :task %>
+      <%= f.text_field :task %>
     </div>
     <div class="actions">
       <%= f.submit %>

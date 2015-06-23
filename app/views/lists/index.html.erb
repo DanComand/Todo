@@ -1,3 +1,5 @@
+ <%= render 'lists/form' %>
+
 <% @lists.each do |list| %>
 
 	<%= link_to list.name, "/lists/#{list.id}" %>
