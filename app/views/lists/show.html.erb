@@ -1,5 +1,26 @@
-  <p>Todos for <%= @list.name %></p>
+  <div class="mui-panel">
+    <p>Todos for <%= @list.name %></p>
+  </div>
+<div class="mui-panel">
+  <% if current_user %>
 
+<% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to add a task.</p> 
+<% end %>
+
+<form class="mui-form-inline">
+  <%= form_for([@list, Todo.new]) do |f| %>
+
+     <div class="mui-form-group">
+      <%= f.label :task %><br />
+      <%= f.text_field :task, class: 'mui-form-control' %>
+    </div>
+    <div class="actions">
+      <%= f.submit '+ Task', :class => 'mui-btn mui-btn-default mui-btn-raised' %>
+    </div>
+  <% end %>
+  </form>
+</div>
   <% @todos.each do |todo| %>
     <p>
       <%= todo.task %>
@@ -11,20 +32,3 @@
     </p>
   <% end %>
 
-  <% if current_user %>
-  <h4>New Review</h4>
-
-  <%= form_for([@list, Todo.new]) do |f| %>
-
-    <div class="field">
-      <%= f.label :task %><br />
-      <%= f.text_field :task %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-
-<% else %>
-  <p>Please <%= link_to "log in", new_session_path %> to add a task.</p> 
-<% end %>
