@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
 	before_filter :load_list
+	before_filter :ensure_logged_in, only: [:create, :destroy]
 
   def index
 
