@@ -1,9 +1,9 @@
 class ListsController < ApplicationController
 
-  before_filter :ensure_logged_in, only: [:show, :create, :destroy]
+before_filter :ensure_logged_in, only: [:index, :show, :create, :destroy]
 
   def index
-  	@lists = List.all
+  	@lists = current_user.lists.order(created_at: :desc)
   end
 
   def new
@@ -19,7 +19,7 @@ class ListsController < ApplicationController
 
   def create
   	@list = List.new(list_params)
-
+    @list.user_id = current_user.id
   	if @list.save
   		redirect_to lists_url
   	else
