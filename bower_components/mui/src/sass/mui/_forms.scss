@@ -1,0 +1,481 @@
+// ==========================
+// Normalize non-controls
+// ==========================
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: $mui-base-line-height-computed / 2;
+  font-size: $mui-legend-font-size;
+  color: $mui-legend-font-color;
+  line-height: inherit;
+  border: 0;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+
+// ===========================
+// Normalize form controls
+// ===========================
+input[type="search"] {
+  box-sizing: border-box;
+}
+
+// Position radios and checkboxes better
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  line-height: normal;
+}
+
+// Set the height of file controls to match text inputs
+input[type="file"] {
+  display: block;
+}
+
+// Make range inputs behave like textual form controls
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+// Make multiple select elements height not fixed
+select[multiple],
+select[size] {
+  height: auto;
+}
+
+// Focus for file, radio, and checkbox
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  @include tab-focus;
+}
+
+
+// =======================
+// Form controls
+// =======================
+// Common form controls
+//
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+.mui-form-control {
+  display: block;
+  background-color: $mui-input-bg-color;
+  color: $mui-input-font-color;
+  border: none;
+  border-bottom: 1px solid $mui-input-border-color;
+  outline: none;
+  height: $mui-input-height;
+  width: 100%;
+  font-size: $mui-input-font-size;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0px;
+
+  // bugfix for firefox-android
+  background-image: none; 
+
+  animation-duration: 0.001s;
+  animation-name: mui-node-inserted;
+  
+  &::placeholder {
+    color: $mui-input-placeholder-color;
+    opacity: 1; // normalize firefox
+  }
+
+  &:focus {
+    border-color: $mui-input-border-color-focus;
+    border-width: 2px;
+  }
+
+  // disabled
+  &[disabled],
+  &[readonly],
+  fieldset[disabled] & {
+    cursor: $mui-cursor-disabled;
+    background-color: $mui-input-bg-color-disabled;
+    opacity: 1; // iOS fix for unreadable disabled content
+  }
+}
+
+// Reset height for `textarea`s
+textarea.mui-form-control {
+  height: auto;
+}
+
+// Compensate for height change on focus
+input.mui-form-control:focus {
+  height: $mui-input-height + 1px;
+  margin-bottom: -1px;
+}
+
+// Search inputs in iOS
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+
+// =====================
+// Form groups
+// =====================
+.mui-form-group {
+  position: relative;
+  margin-bottom: $mui-form-group-margin-bottom;
+  padding-top: $mui-label-font-size + $mui-label-margin-bottom;
+
+  // position label at top
+  > label {
+    position: absolute;
+    color: $mui-label-font-color;
+    top: 0px;
+    font-size: $mui-label-font-size;
+    font-weight: 400;
+
+    &.mui-form-floating-label {
+      top: 5px + $mui-label-font-size + $mui-label-margin-bottom;
+      font-size: $mui-input-font-size;
+      pointer-events: none;
+      color: $mui-input-placeholder-color;
+      cursor: text; // for ie10
+    }
+  }
+
+  > textarea {
+    padding-top: 5px;
+    min-height: $mui-textarea-height;
+  }
+
+
+  // labels
+  > .mui-form-control {
+    // focused
+    &:focus {
+      ~ label {
+        color: $mui-input-border-color-focus;
+      }
+
+      ~ .mui-form-floating-label {
+        font-size: $mui-label-font-size;
+        top: 0px;
+      }
+    }
+
+    // not focused and not empty
+    &:not(:focus) {
+      &.mui-not-empty,
+      &[value]:not([value=""]):not(.mui-empty):not(.mui-not-empty),
+      &:not(:empty):not(.mui-empty):not(.mui-not-empty) {
+        ~ .mui-form-floating-label {
+          color: $mui-label-font-color;
+          font-size: $mui-label-font-size;
+          top: 0px;
+        }
+      }
+    }
+  }
+}
+
+
+// ===========================
+// Checkboxes and radios
+// ===========================
+// Indent the labels to position radios/checkboxes as hanging controls.
+
+.mui-radio,
+.mui-checkbox {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  label {
+    min-height: $mui-base-line-height-computed;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+  }
+}
+
+.mui-radio input[type="radio"],
+.mui-radio-inline input[type="radio"],
+.mui-checkbox input[type="checkbox"],
+.mui-checkbox-inline input[type="checkbox"] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px;
+}
+
+.mui-radio + .mui-radio,
+.mui-checkbox + .mui-checkbox {
+  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
+}
+
+// Radios and checkboxes on same line
+.mui-radio-inline,
+.mui-checkbox-inline {
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.mui-radio-inline + .mui-radio-inline,
+.mui-checkbox-inline + .mui-checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px; // space out consecutive inline controls
+}
+
+// Apply same disabled cursor tweak as for inputs
+input[type="radio"],
+input[type="checkbox"] {
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: $mui-cursor-disabled;
+  }
+}
+
+// These classes are used directly on <label>s
+.mui-radio-inline,
+.mui-checkbox-inline {
+  fieldset[disabled] & {
+    cursor: $mui-cursor-disabled;
+  }
+}
+
+// These classes are used on elements with <label> descendants
+.mui-radio,
+.mui-checkbox {
+  fieldset[disabled] & {
+    label {
+      cursor: $mui-cursor-disabled;
+    }
+  }
+}
+
+
+// =====================
+// Select
+// =====================
+.mui-select {
+  position: relative;
+  
+  > select {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: $mui-input-height;
+    width: 100%;
+    color: $mui-input-font-color;
+    font-size: $mui-input-font-size;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $mui-input-border-color;
+    border-radius: 0px;
+    box-shadow: none;
+    padding: 0 25px 0 0;
+    background-color: $mui-input-bg-color;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNiIgd2lkdGg9IjEwIj48cG9seWdvbiBwb2ludHM9IjAsMCAxMCwwIDUsNiIgc3R5bGU9ImZpbGw6cmdiYSgwLDAsMCwuMjQpOyIvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-position: right center;
+    cursor: pointer;
+
+    animation-duration: 0.001s;
+    animation-name: mui-node-inserted;
+    
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      outline: 0;
+      height: $mui-input-height + 1px;
+      margin-bottom: -1px;
+      border-color: $mui-input-border-color-focus;
+      border-width: 2px;
+    }
+
+    &:disabled {
+      color: mui-color('black-alpha-26');
+      cursor: $mui-cursor-disabled;
+      background-color: $mui-input-bg-color-disabled;
+      opacity: 1; // iOS fix for unreadable disabled content
+    }
+  }
+
+  &:focus {
+    outline: 0;
+    
+    > select {
+      height: $mui-input-height + 1px;
+      margin-bottom: -1px;
+      border-color: $mui-input-border-color-focus;
+      border-width: 2px;
+    }
+  }
+}
+
+.mui-select-menu {
+  position: absolute;
+  background-color: mui-color('white');
+  min-width: 100%;
+  padding: 8px 0;
+  font-size: $mui-input-font-size;
+  @extend .mui-z1;
+  z-index: 1;
+  
+  > div {
+    padding: 0 22px;
+    height: $mui-input-font-size + 26px;
+    line-height: $mui-input-font-size + 26px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: mui-color('grey', '300');
+    }
+
+    &[selected] {
+      background-color: mui-color('grey', '200'); 
+    }
+  }
+  
+}
+
+
+// =====================
+// Form-inline
+// =====================
+.mui-form-inline {
+
+  // Kick in the inline
+  @media (min-width: $mui-screen-sm-min) {
+    // bottom align children
+    > * {
+      vertical-align: bottom;
+    }
+    
+    // Inline-block all the things for "inline"
+    .mui-form-group {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+
+    .mui-form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+    
+    // Remove default margin on radios/checkboxes that were used for stacking
+    .mui-radio,
+    .mui-checkbox {
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 0;
+      vertical-align: middle;
+
+      label {
+        padding-left: 0;
+      }
+    }
+    
+    .mui-radio input[type="radio"],
+    .mui-checkbox input[type="checkbox"] {
+      position: relative;
+      margin-left: 0;
+    }
+
+    .mui-select {
+      display: inline-block;
+    }
+  }
+}
+
+
+// ========================
+// Form validation
+// ========================
+
+// required
+.mui-form-group > .mui-form-control:required ~ label:after {
+  content: ' *';
+}
+
+.mui-form-control:required:invalid:not(:focus) {
+  border-color: $mui-primary-color;
+}
+
+// validators
+.mui-form-control:invalid:not(:focus) {
+  &:not(:required),
+  &:required.mui-not-empty,
+  &:required.mui-empty.mui-dirty,
+  &:required[value]:not([value=""]):not(.mui-empty):not(.mui-not-empty),
+  &:required:not(:empty):not(.mui-empty):not(.mui-not-empty) {
+    border-color: $mui-danger-color;
+    border-width: 2px;
+  }
+}
+
+input.mui-form-control:invalid:not(:focus) {
+  &:not(:required),
+  &:required.mui-not-empty,
+  &:required.mui-empty.mui-dirty,
+  &:required[value]:not([value=""]):not(.mui-empty):not(.mui-not-empty),
+  &:required:not(:empty):not(.mui-empty):not(.mui-not-empty) {
+    height: $mui-input-height + 1px;
+    margin-bottom: -1px;
+  }
+}
+
+.mui-form-group > .mui-form-control:invalid:not(:focus) {
+  &:not(:required),
+  &:required.mui-not-empty,
+  &:required[value]:not([value=""]):not(.mui-empty):not(.mui-not-empty),
+  &:required:not(:empty):not(.mui-empty):not(.mui-not-empty) {
+    ~ label {
+      color: $mui-danger-color;
+    }
+  }
+
+  &:required.mui-empty.mui-dirty ~ label:not(.mui-form-floating-label) {
+    color: $mui-danger-color;
+  }
+}

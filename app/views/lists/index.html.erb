@@ -1,7 +1,13 @@
  <%= render 'lists/form' %>
+ <div class="mui-container">
+ 	<div class="mui-panel">
+  <!-- content -->
 
 <% @lists.each do |list| %>
 
-	<%= link_to list.name, "/lists/#{list.id}" %>
+	<p><%= link_to list.name, "/lists/#{list.id}" %></p>
 
 <% end %>
+
+</div>
+</div>

@@ -1,0 +1,46 @@
+{
+  "name": "mui",
+  "version": "0.1.13",
+  "license": "MIT",
+  "authors": [
+    "Andres Morey <andres@muicss.com>"
+  ],
+  "homepage": "https://www.muicss.com",
+  "main": [
+    "src/sass/mui.scss",
+    "src/sass/mui/_colors.scss",
+    "src/email/mui-email-inline.scss",
+    "src/email/mui-email-styletag.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/muicss/mui.git"
+  },
+  "keywords": [
+    "material design",
+    "frontend framework",
+    "html, css, and js framework",
+    "email css template"
+  ],
+  "dependencies": {},
+  "ignore": [
+    "**/.*",
+    "dist",
+    "e2e-tests",
+    "examples",
+    "gulpfile.js",
+    "node_modules",
+    "package.json",
+    "test"
+  ],
+  "_release": "0.1.13",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.13",
+    "commit": "0a1396a2ea9468063db3368c99ee3676e3db52bd"
+  },
+  "_source": "git://github.com/muicss/mui.git",
+  "_target": "~0.1.13",
+  "_originalSource": "mui",
+  "_direct": true
+}
