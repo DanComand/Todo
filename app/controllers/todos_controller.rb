@@ -15,7 +15,7 @@ class TodosController < ApplicationController
   	@todo.user = current_user
 
   	if @todo.save
-  		redirect_to lists_path, notice: 'Todo added'
+  		redirect_to lists_path(@list), notice: 'Todo added'
   	else
   		render 'lists/show'
   	end
